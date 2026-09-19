@@ -1,0 +1,202 @@
+/* === RESET & GLOBAL STYLES === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: #fce4ec;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden; overflow-y: hidden; min-height: 100vh;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23d81b60" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
+}
+
+.cursor-trail { position: absolute; pointer-events: none; width: 15px; height: 15px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff4081" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'); background-size: cover; z-index: 10001; animation: fadeTrail 1s ease-out forwards; }
+@keyframes fadeTrail { 0% { transform: scale(1) translateY(0); opacity: 0.8; } 100% { transform: scale(0.4) translateY(-30px); opacity: 0; } }
+
+/* === SCREEN 0 & SCREEN 1 === */
+#welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, #fce4ec, #f8bbd0); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-out; }
+.welcome-box { text-align: center; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(216, 27, 96, 0.15); max-width: 90%; width: 800px; }
+.welcome-box h2 { color: #d81b60; margin-bottom: 15px; font-size: 5.0rem; }
+.welcome-box p { color: #555; margin-bottom: 25px; line-height: 1.6; font-size: 1.5rem;}
+#start-btn, .next-btn { background-color: #d81b60; color: white; border: none; padding: 12px 30px; font-size: 1.5rem; font-weight: bold; border-radius: 30px; cursor: pointer; transition: transform 0.2s, background-color 0.3s; box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3); margin-top: 15px; }
+#start-btn:hover, .next-btn:hover { background-color: #c2185b; transform: scale(1.05); }
+
+
+/* === SCREEN 1: ENVELOPE & DECORATIONS === */
+#screen-1 { display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%; transition: opacity 1s ease-in-out; position: relative; overflow: hidden; }
+
+.floating-decor .decor { position: absolute; bottom: -10%; left: var(--x); font-size: 6rem; animation: floatUp 8s infinite ease-in-out; animation-delay: var(--d); opacity: 0.7; z-index: 1; }
+@keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+
+/* Bungkus amplop dengan penyesuaian skala */
+.envelope-wrapper { 
+    position: relative; 
+    cursor: pointer; 
+    animation: float 3s ease-in-out infinite; 
+    z-index: 10; 
+    /* Ini trik sulapnya: memperbesar skala elemen 1.8x - 2x tanpa merusak kerangka kode */
+    transform: scale(1.8);
+}
+
+.envelope { position: relative; width: 340px; height: 230px; background-color: #f06292; border-radius: 0 0 10px 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); z-index: 3; }
+.envelope::before { content: ''; position: absolute; width: 0; height: 0; border-left: 170px solid transparent; border-right: 170px solid transparent; border-bottom: 115px solid #e91e63; bottom: 0; z-index: 4; }
+.envelope::after { content: ''; position: absolute; width: 0; height: 0; border-left: 170px solid #d81b60; border-bottom: 115px solid transparent; border-top: 115px solid transparent; left: 0; z-index: 4; }
+.flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 170px solid transparent; border-right: 170px solid transparent; border-top: 125px solid #ff80ab; transform-origin: top; transition: transform 0.6s ease-in-out; z-index: 5; }
+
+/* Surat di dalamnya */
+.letter { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 300px; height: 210px; background-color: #fff; border-radius: 8px; padding: 25px 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2; display: flex; flex-direction: column; justify-content: center; }
+.letter h2 { color: #d81b60; font-size: 1.5rem; margin-bottom: 15px; }
+.letter p { color: #444; font-size: 1.05rem; line-height: 1.5; font-weight: 500; }
+
+.envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-wrapper.open .letter { transform: translate(-50%, -150px); z-index: 4; }
+
+/* Animasi melayang yang udah disesuaikan biar tetep ngikutin skala besarnya */
+@keyframes float { 
+    0%, 100% { transform: scale(1.8) translateY(0); } 
+    50% { transform: scale(1.8) translateY(-15px); } 
+}
+
+/* RESPONSIVE UNTUK LAYAR HP (Mengecil otomatis biar nggak kepotong) */
+@media screen and (max-width: 768px) {
+    .envelope-wrapper { transform: scale(1); }
+    @keyframes float { 
+        0%, 100% { transform: scale(1) translateY(0); } 
+        50% { transform: scale(1) translateY(-15px); } 
+    }
+}
+/* === SCREEN STORY (INTERAKTIF) - TRANSISI SMOOTH === */
+#screen-story { 
+    width: 100%; 
+    height: 100vh; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 100; 
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5); 
+    transition: opacity 1s ease-in-out;
+    opacity: 0; /* Awalnya tembus pandang */
+}
+
+/* Base style untuk surat dan foto */
+.story-step { 
+    position: absolute; /* Dibikin absolute biar numpuk di tengah persis */
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -40%); /* Posisi awal agak ke bawah sedikit */
+    opacity: 0; 
+    visibility: hidden; /* Pakai visibility biar transisi jalan, jangan display:none */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px; 
+}
+
+/* Class ini ditambahkan lewat JS biar elemennya muncul meluncur mulus */
+.story-step.active {
+    transform: translate(-50%, -50%); /* Naik ke posisi tengah persis */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Desain Polaroid Besar buat Slideshow */
+.polaroid-large { background: #fff; padding: 20px 20px 60px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-radius: 10px; max-width: 90%; width: 450px; transform: rotate(-2deg); margin-bottom: 30px; }
+.polaroid-large img { width: 100%; height: 400px; object-fit: cover; background-color: #eee; border-radius: 5px; }
+.polaroid-large p { text-align: center; margin-top: 25px; color: #880e4f; font-size: 1.3rem; font-weight: bold; }
+/* Desain Polaroid Besar buat Slideshow */
+.polaroid-large { background: #fff; padding: 20px 20px 60px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-radius: 10px; max-width: 90%; width: 450px; transform: rotate(-2deg); margin-bottom: 30px; }
+.polaroid-large img { width: 100%; height: 400px; object-fit: cover; background-color: #eee; border-radius: 5px; }
+.polaroid-large p { text-align: center; margin-top: 25px; color: #880e4f; font-size: 1.3rem; font-weight: bold; }
+
+/* === SCREEN 2 & SURAT (Sama seperti sebelumnya) === */
+#screen-2 { width: 100%; padding: 60px 20px; opacity: 0; transition: opacity 1.5s ease-in-out; background: linear-gradient(135deg, #ffe4e1, #fff0f5, #ffb6c1); min-height: 100vh; }
+.screen-2-header { text-align: center; margin-bottom: 50px; }
+.screen-2-header h1 { color: #d81b60; font-size: 2.8rem; text-shadow: 2px 2px 5px rgba(216, 27, 96, 0.2); margin-bottom: 10px; }
+.screen-2-header .subtitle { color: #ad1457; font-size: 1.3rem; font-style: italic; }
+.memory-board { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: 0 auto; }
+.polaroid { width: 320px; background: #fff; padding: 15px 15px 45px 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-radius: 5px; opacity: 0; transform: translateY(60px) rotate(calc(var(--r) * 1deg)); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.polaroid:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 40px rgba(216, 27, 96, 0.3); }
+.polaroid.show { opacity: 1; transform: translateY(0) rotate(calc(var(--r) * 1deg)); }
+.polaroid img { width: 100%; height: 320px; object-fit: cover; }
+.polaroid p { text-align: center; margin-top: 15px; color: #880e4f; font-size: 1.1rem; font-weight: 600; }
+
+.floral-letter-wrapper { position: relative; max-width: 700px; margin: 80px auto 100px; text-align: center; opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+.floral-letter-wrapper.show { opacity: 1; transform: translateY(0); }
+.wishes-box { background: rgba(255, 255, 255, 0.95); padding: 50px 40px; border-radius: 20px; border: 3px solid #ffb6c1; box-shadow: 0 15px 40px rgba(216, 27, 96, 0.15); position: relative; z-index: 1; overflow: hidden; text-align: center;}
+.floral-corner { position: absolute; font-size: 2.5rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); z-index: 2; pointer-events: none; }
+.floral-corner.top-left { top: 15px; left: 15px; transform: rotate(-15deg); }
+.floral-corner.top-right { top: 15px; right: 15px; transform: rotate(15deg); }
+.floral-corner.bottom-left { bottom: 15px; left: 15px; transform: rotate(-15deg); }
+.floral-corner.bottom-right { bottom: 15px; right: 15px; transform: rotate(15deg); }
+.wishes-box::before, .wishes-box::after { content: '🌸 🌺 🌼 🌸 🌺'; position: absolute; font-size: 2.5rem; opacity: 0.5; letter-spacing: 30px; pointer-events: none; z-index: 2; }
+.wishes-box::before { top: 5px; left: 50%; transform: translateX(-50%); }
+.wishes-box::after { bottom: 5px; left: 50%; transform: translateX(-50%); }
+.wishes-box h2 { color: #c2185b; font-size: 5.0rem; margin-bottom: 20px; position: relative; z-index: 3; }
+.wishes-box p { color: #444; font-size: 1.6rem; line-height: 1.7; margin-bottom: 15px; position: relative; z-index: 3; }
+
+/* === WHATSAPP REPLY BOX === */
+.reply-box-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 40px auto 100px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.reply-box-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reply-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(216, 27, 96, 0.15);
+    border: 2px dashed #f06292;
+}
+
+.reply-box h2 { color: #d81b60; font-size: 1.8rem; margin-bottom: 10px; }
+.reply-box p { color: #555; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; }
+
+#reply-message {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    font-family: inherit;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s;
+    background-color: #fffafb;
+}
+
+#reply-message:focus {
+    border-color: #d81b60;
+    box-shadow: 0 0 8px rgba(216, 27, 96, 0.2);
+}
+
+#btn-whatsapp {
+    background-color: #25D366; /* Warna hijau WA */
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+#btn-whatsapp:hover {
+    background-color: #1ebe57;
+    transform: scale(1.05);
+}
+
+.hidden { display: none !important; }

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apa yaa ini! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="bgm" src="Hbd Pamungkas.mp3" loop></audio>
+
+    <!-- SCREEN 0: WELCOME -->
+    <div id="welcome-screen">
+        <div class="welcome-box">
+            <h2>Hai Sayangku! 👋</h2>
+            <p>Pake earphone dulu yuk beby atau gedein dikit volumenya soalnya ada backsound nya. Beby boleh siapin Handphone buat video ya. Kalau udah siap, klik tombol di bawah ya sayangku! ❤️</p>
+            <button id="start-btn">Tekan ini ya beby</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 1: SURAT CINTA -->
+    <div id="screen-1">
+        <div class="floating-decor">
+            <span class="decor" style="--d: 0s; --x: 10vw;">🎈</span>
+            <span class="decor" style="--d: 2s; --x: 80vw;">✨</span>
+            <span class="decor" style="--d: 4s; --x: 25vw;">💖</span>
+            <span class="decor" style="--d: 1s; --x: 70vw;">🎉</span>
+            <span class="decor" style="--d: 3s; --x: 45vw;">🎈</span>
+            <span class="decor" style="--d: 5s; --x: 90vw;">💖</span>
+        </div>
+    
+    <!-- Dekorasi Background (Lebih Ramai) -->
+    <div class="floating-decor">
+        <span class="decor" style="--d: 0s; --x: 5vw;">🎈</span>
+        <span class="decor" style="--d: 2s; --x: 15vw;">✨</span>
+        <span class="decor" style="--d: 4s; --x: 25vw;">💖</span>
+        <span class="decor" style="--d: 1.5s; --x: 35vw;">🎉</span>
+        <span class="decor" style="--d: 3s; --x: 45vw;">🎈</span>
+        <span class="decor" style="--d: 5s; --x: 55vw;">💖</span>
+        <span class="decor" style="--d: 0.5s; --x: 65vw;">🎂</span>
+        <span class="decor" style="--d: 2.5s; --x: 75vw;">✨</span>
+        <span class="decor" style="--d: 4.5s; --x: 85vw;">🎉</span>
+        <span class="decor" style="--d: 1s; --x: 90vw;">🎈</span>
+        <span class="decor" style="--d: 3.5s; --x: 95vw;">💖</span>
+        
+        <!-- Tambahan ekstra biar lebih padat -->
+        <span class="decor" style="--d: 6s; --x: 10vw;">🌸</span>
+        <span class="decor" style="--d: 1.2s; --x: 30vw;">💌</span>
+        <span class="decor" style="--d: 5.5s; --x: 70vw;">🌸</span>
+        <span class="decor" style="--d: 2.2s; --x: 50vw;">✨</span>
+    </div>
+
+        <div class="envelope-wrapper" id="envelope">
+            <div class="flap"></div>
+            <div class="letter">
+                <h2>Happy Birthday Yang Ke-19 Sayangnya Aku! 🎂</h2>
+                <p>Ada kejutan kecil buat kamu hari ini. Tunggu ya sayangku! ❤️</p>
+            </div>
+            <div class="envelope"></div>
+        </div>
+    </div>
+
+    <!-- SCREEN STORY (TRANSISI INTERAKTIF) -->
+    <div id="screen-story" class="hidden">
+        
+        <!-- Step 1: Surat Harapan -->
+        <div id="story-letter" class="story-step">
+            <div class="wishes-box">
+                <div class="floral-corner top-left">🌸🌿</div>
+                <div class="floral-corner top-right">🌿🌺</div>
+                <div class="floral-corner bottom-left">🌷🍃</div>
+                <div class="floral-corner bottom-right">🍃🌼</div>
+                
+                <h2>Doa untuk kamu sayangku!</h2>
+                <p>Semoga di umur yang baru ini kamu makin bahagia, rezekinya lancar, dan semua yang kamu inginkan bisa terwujud yaaa, aamiin. Makasih udah jadi pacar yang super sabar dan gemesin. Semoga kedepannya untuk hubungan kita akan selalu support dan menguatkan satu sama lain yaa sayangku!</p>
+                <button class="next-btn" id="btn-to-photo">Lanjut ❤️</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Slideshow Foto -->
+        <div id="story-photo" class="story-step">
+            <div class="polaroid-large">
+                <img id="slideshow-img" src="" alt="Kenangan">
+                <p id="slideshow-text">Teks kenangan...</p>
+            </div>
+            <button class="next-btn" id="btn-next-photo">Selanjutnya ✨</button>
+        </div>
+
+    </div>
+
+    <!-- SCREEN 2: LAYAR UTAMA (GALERI KESELURUHAN) -->
+    <div id="screen-2" class="hidden">
+        <div class="screen-2-header">
+            <h1>Selamat Bertambah Umur! 🎉</h1>
+            <p class="subtitle">Kumpulan momen gemes kita...</p>
+        </div>
+
+        <div class="memory-board">
+            <div class="polaroid" style="--r: -3;">
+                <img src="https://via.placeholder.com/400x400/ffb6c1/ffffff?text=Foto+1" alt="Foto 1">
+                <p>Muka lucu kamu pas lagi ngambek 😝</p>
+            </div>
+            <div class="polaroid" style="--r: 4;">
+                <img src="https://via.placeholder.com/400x400/ffb6c1/ffffff?text=Foto+2" alt="Foto 2">
+                <p>Jalan-jalan random tapi seru banget!</p>
+            </div>
+            <div class="polaroid" style="--r: -2;">
+                <img src="https://via.placeholder.com/400x400/ffb6c1/ffffff?text=Foto+3" alt="Foto 3">
+                <p>Senyum yang paling aku suka ❤️</p>
+            </div>
+        </div>
+
+        <!-- Surat Harapan di bagian akhir halaman -->
+        <div class="floral-letter-wrapper">
+            <div class="wishes-box">
+                <div class="floral-corner top-left">🌸🌿</div>
+                <div class="floral-corner top-right">🌿🌺</div>
+                <div class="floral-corner bottom-left">🌷🍃</div>
+                <div class="floral-corner bottom-right">🍃🌼</div>
+                
+                <h2>I Love You! 💖</h2>
+                <p>Selamat ulang tahun, pacar nya akuu! Semoga di umur yang baru ini kamu makin bahagia, rezekinya lancar, dan semua yang kamu pengenin bisa terwujud.</p>
+            </div>
+        </div>
+
+        <!-- KOTAK BALASAN WHATSAPP -->
+        <div class="reply-box-wrapper">
+            <div class="reply-box">
+                <h2>Balasan Untuk Tusab 💌</h2>
+                <p>Gimana kejutannya sayang hehehe maaf ya segini aja? Tulis balasan kamu di bawah ini ya, nanti langsung kekirim ke WhatsApp aku!</p>
+                <textarea id="reply-message" rows="4" placeholder="Ketik pesan romantis kamu di sini..."></textarea>
+                <button id="btn-whatsapp">Kirim Pesan 🚀</button>
+            </div>
+        </div>
+    </div> <!-- Tutup div screen-2 -->
+
+    <script src="script.js"></script>
+</body>
+</html>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
